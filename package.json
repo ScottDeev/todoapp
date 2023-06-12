@@ -1,0 +1,13 @@
+{
+  "name": "todoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/server.js",
+  "scripts": {
+    "start:dev": "concurrently \"npm run server\" \"npm run client\" -k",
+    "server": "cd backend && npm run dev", 
+    "client": "cd frontend && npm run dev"
+  },
+  "author": "",
+  "license": "ISC"
+}
