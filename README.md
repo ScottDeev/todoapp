@@ -36,7 +36,7 @@ PORT=4000
 
 ```
 npm run start:dev
-
+```
 
 The app will be running on [http://localhost:5173](http://localhost:5173/).
 
