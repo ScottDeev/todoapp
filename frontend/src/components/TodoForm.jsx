@@ -1,9 +1,10 @@
 import { useState } from "react"
 
 import {useTodoContext} from '../hooks/useTodoContext'
-
+import { useAuthContext } from "../hooks/useAuthContext";
 export default function TodoForm() {
   const { dispatch } = useTodoContext()
+  const {user} = useAuthContext()
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -21,7 +22,8 @@ export default function TodoForm() {
       method: 'POST',
       body: JSON.stringify(todo),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
     })
     const json = await response.json()

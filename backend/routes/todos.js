@@ -1,7 +1,10 @@
 const express = require('express')
 const {getTodos, getTodo, createTodo, deleteTodo, updateTodo} = require('../controllers/todoController')
-
+const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
+
+// Authorization check
+router.use(requireAuth)
 
 // Get all todos
 router.get('/', getTodos);

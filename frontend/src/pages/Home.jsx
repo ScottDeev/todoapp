@@ -2,34 +2,42 @@ import { useEffect } from "react"
 import TodoDetails from "../components/TodoDetails"
 import { useTodoContext } from "../hooks/useTodoContext"
 import TodoForm from '../components/TodoForm'
+
+import { useAuthContext } from "../hooks/useAuthContext"
+
+
 export default function Home() {
 const {todos, dispatch} = useTodoContext()
-
+const {user} = useAuthContext()
 
 useEffect(() => {
   const fetchWorkouts = async () => {
     try{
-      const res = await fetch('/api/todos')
+      const res = await fetch('/api/todos', {
+        headers:{
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
       const json = await res.json()
-      console.log(json);
-      dispatch({type: 'SET_TODOS', payload: json})
+      if(res.ok){
+        dispatch({type: 'SET_TODOS', payload: json})
+      }
     }catch(err){
       console.log(err);
     }
   }
-
   fetchWorkouts()
 }, [dispatch])
   return (
-    <div className="flex max-w-[1200px] mx-auto gap-[5%] mb-[50px]">
-      <div className="flex flex-col gap-[10px] w-[55%]">
+    <div className="flex flex-col-reverse md:flex-row md:max-w-[1200px] md:px-0 px-[30px] mx-auto md:gap-[5%] gap-[30px] mb-[50px]">
+      <div className="flex flex-col gap-[10px] md:w-[55%]">
         {
           todos && todos.map(todo => (
             <TodoDetails key={todo._id} todo={todo}/>
           ))
         }
       </div>
-      <div className="w-[40%]">
+      <div className="md:w-[40%]">
         <TodoForm/>
       </div>
     </div>
