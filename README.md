@@ -45,9 +45,8 @@ The app will be running on [http://localhost:5173](http://localhost:5173/).
 The app has the following features:
 
 * Create, read, update, and delete todos
-
-## To-do
 * Authentication and authorization
+## To-do
 * Add more features
 * Improve the user experience
 * Fix bugs
