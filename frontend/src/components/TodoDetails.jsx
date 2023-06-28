@@ -2,12 +2,12 @@ import {format} from 'date-fns'
 import {useTodoContext} from '../hooks/useTodoContext'
 import { useState } from "react"
 import { useAuthContext } from '../hooks/useAuthContext'
-
+import { TODOS } from '../utils/api'
 export default function TodoDetails({todo}) {
   const {dispatch} = useTodoContext()
   const {user} = useAuthContext()
   const handleCheckboxChange = async () => {
-    const res = await fetch('/api/todos/' + todo._id, {
+    const res = await fetch(TODOS + todo._id, {
       method: 'PATCH',
       body: JSON.stringify({ completed: !todo.completed }),
       headers: {
@@ -22,7 +22,7 @@ export default function TodoDetails({todo}) {
     }
   };
   const handleClick = async () => {
-    const res = await fetch('/api/todos/' + todo._id, {
+    const res = await fetch(TODOS + todo._id, {
       method: 'DELETE'
     })
     const json = await res.json()

@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import {useTodoContext} from '../hooks/useTodoContext'
 import { useAuthContext } from "../hooks/useAuthContext";
+import { TODOS } from "../utils/api";
 export default function TodoForm() {
   const { dispatch } = useTodoContext()
   const {user} = useAuthContext()
@@ -18,7 +19,7 @@ export default function TodoForm() {
 
     const todo = {title, description, startDate, dueDate, completed:false}
     
-    const response = await fetch('/api/todos', {
+    const response = await fetch(TODOS, {
       method: 'POST',
       body: JSON.stringify(todo),
       headers: {

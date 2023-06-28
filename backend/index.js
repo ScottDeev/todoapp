@@ -10,6 +10,10 @@ const app = express();
 
 // middleware
 app.use(express.json())
+app.use(cors({
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 
 // routes
 app.use('/api/todos', todoRoutes)

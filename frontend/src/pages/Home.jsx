@@ -2,9 +2,8 @@ import { useEffect } from "react"
 import TodoDetails from "../components/TodoDetails"
 import { useTodoContext } from "../hooks/useTodoContext"
 import TodoForm from '../components/TodoForm'
-
 import { useAuthContext } from "../hooks/useAuthContext"
-
+import { TODOS } from "../utils/api"
 
 export default function Home() {
 const {todos, dispatch} = useTodoContext()
@@ -13,7 +12,7 @@ const {user} = useAuthContext()
 useEffect(() => {
   const fetchWorkouts = async () => {
     try{
-      const res = await fetch('/api/todos', {
+      const res = await fetch(TODOS, {
         headers:{
           'Authorization': `Bearer ${user.token}`
         }
