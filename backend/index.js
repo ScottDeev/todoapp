@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const todoRoutes = require('./routes/todos')
 const userRoutes = require('./routes/users')
+const cors = require('cors')
 
 // initialize express
 const app = express();
