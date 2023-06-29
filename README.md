@@ -47,7 +47,8 @@ The app has the following features:
 * Create, read, update, and delete todos
 * Authentication and authorization
 ## To-do
-* Add more features
+* Email verification endpoint
+* Forgot password endpoint
 * Improve the user experience
 * Fix bugs
 
