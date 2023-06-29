@@ -8,7 +8,7 @@ export default function Navbar() {
     logout()
   }
   return (
-    <header className="w-full fixed bg-[#000000]">
+    <header className="w-full fixed bg-[#000000] z-10">
       <nav className="flex flex-col sm:flex-row py-[20px] px-[30px] justify-between">
         <Link className="md:text-[30px] text-[25px] text-white font-[700]" to='/'>TodoTracker</Link>
         <div className="text-white flex items-center gap-[20px]">

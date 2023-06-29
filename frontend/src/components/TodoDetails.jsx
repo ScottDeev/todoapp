@@ -3,7 +3,9 @@ import {useTodoContext} from '../hooks/useTodoContext'
 import { useState } from "react"
 import { useAuthContext } from '../hooks/useAuthContext'
 import { TODOS } from '../utils/api'
+import DeletePopup from './DeletePopup'
 export default function TodoDetails({todo}) {
+  const [showDelPop, setShowDelPop] = useState(false)
   const {dispatch} = useTodoContext()
   const {user} = useAuthContext()
   const handleCheckboxChange = async () => {
@@ -21,16 +23,9 @@ export default function TodoDetails({todo}) {
       dispatch({type:'UPDATE_TODO', payload: json})
     }
   };
-  const handleClick = async () => {
-    const res = await fetch(TODOS + todo._id, {
-      method: 'DELETE'
-    })
-    const json = await res.json()
-
-    if(res.ok){
-      dispatch({type:'DELETE_TODO', payload: json})
-    }
-  }
+const toggle = () => {
+  setShowDelPop(!showDelPop)
+}
   return (
     <div className="relative box rounded-[20px] p-[30px] flex flex-col gap-[20px] bg-black text-white">
       <div className="flex items-start gap-[10px]">
@@ -51,7 +46,8 @@ export default function TodoDetails({todo}) {
         <span>Completed</span>
         <input type="checkbox" className="h-[20px] w-[20px] mt-[-1px] cursor-pointer" name="" id="" checked={todo.completed} onChange={handleCheckboxChange} />
       </div>
-      <span className='absolute top-[20px] right-[20px] cursor-pointer material-symbols-outlined cursor-pointer' onClick={handleClick}>delete</span>
+      <span className='absolute top-[20px] right-[20px] cursor-pointer material-symbols-outlined cursor-pointer' onClick={toggle}>delete</span>
+      {showDelPop && <DeletePopup todo={todo} toggle={toggle}/>}
     </div>
   )
 }

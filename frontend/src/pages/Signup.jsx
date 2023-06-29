@@ -4,6 +4,7 @@ import { useSignup } from "../hooks/useSignup"
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [show, setShow] = useState(false)
   const {signup, error, isLoading} = useSignup()
 
   const handleSubmit = async (e) => {
@@ -12,8 +13,11 @@ const Signup = () => {
     await signup(email, password)
   }
 
+  const toggle = () => {
+    setShow(!show)
+  }
   return (
-    <form className="max-w-[400px] mx-auto" onSubmit={handleSubmit}>
+    <form className="max-w-[460px] px-[30px] mx-auto" onSubmit={handleSubmit}>
       <h3 className="mb-[20px]">Sign Up</h3>
       
       <label>Email address:</label>
@@ -23,13 +27,16 @@ const Signup = () => {
         value={email} 
       />
       <label>Password:</label>
-      <input 
-        type="password" 
-        onChange={(e) => setPassword(e.target.value)} 
-        value={password} 
-      />
+      <div className="relative">
+        <input 
+          type={show ? "text" : "password"} 
+          onChange={(e) => setPassword(e.target.value)} 
+          value={password} 
+        />
+        <span className='absolute top-[10px] right-[10px] cursor-pointer material-symbols-outlined cursor-pointer' onClick={toggle}>{show ? "Visibility" : "Visibility_off"}</span>
+      </div>
 
-      <button disabled={isLoading}>Sign up</button>
+      <button disabled={isLoading}>{isLoading ? "Please wait..." : "Sign Up"}</button>
       {error && <div className="error">{error}</div>}
     </form>
   )

@@ -13,10 +13,11 @@ export default function TodoForm() {
   const [dueDate, setDueDate] = useState('');
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    setIsLoading(true)
     const todo = {title, description, startDate, dueDate, completed:false}
     
     const response = await fetch(TODOS, {
@@ -39,8 +40,8 @@ export default function TodoForm() {
       setDescription('')
       setStartDate('')
       setDueDate('')
-      console.log('new todo added:', json)
       dispatch({type: 'CREATE_TODO', payload:json})
+      setIsLoading(false)
     }
 
   }
@@ -81,7 +82,7 @@ export default function TodoForm() {
       className={emptyFields.includes('dueDate') ? 'error' : ''}
     />
 
-    <button>Add Workout</button>
+    <button disabled={isLoading}>{isLoading ? "Adding..." : "Add Workout"}</button>
     {error && <div className="error">{error}</div>}
   </form>
   )
