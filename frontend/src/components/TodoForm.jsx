@@ -82,7 +82,7 @@ export default function TodoForm() {
       className={emptyFields.includes('dueDate') ? 'error' : ''}
     />
 
-    <button disabled={isLoading}>{isLoading ? "Adding..." : "Add Workout"}</button>
+    <button disabled={isLoading}>{isLoading ? "Adding..." : "Add Todo"}</button>
     {error && <div className="error">{error}</div>}
   </form>
   )
